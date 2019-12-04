@@ -26,17 +26,21 @@ func findFuel(mass int, additionalFuel bool, sumFuel int) int {
 	currentFuel := (mass / 3) - 2
 
 	if !additionalFuel {
-		if mass <= 0 || currentFuel <= 0 {
+		if isMassOrFuelBelowZero(mass, currentFuel) {
 			return 0
 		}
 
 		return currentFuel
 	}
 
-	if mass <= 0 || currentFuel <= 0 {
+	if isMassOrFuelBelowZero(mass, currentFuel) {
 		return sumFuel
 	}
 
 	return findFuel(currentFuel, additionalFuel, sumFuel+currentFuel)
 
+}
+
+func isMassOrFuelBelowZero(mass int, currentFuel int) bool {
+	return mass <= 0 || currentFuel <= 0
 }

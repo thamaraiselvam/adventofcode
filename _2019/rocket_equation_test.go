@@ -123,3 +123,38 @@ func Test_sumOfGivenArray(t *testing.T) {
 		})
 	}
 }
+
+func TestIsMassOrFuelBelowZero(t *testing.T) {
+	type args struct {
+		mass        int
+		currentFuel int
+	}
+	tests := []struct {
+		name     string
+		args     args
+		expected bool
+	}{
+		{
+			name: "Should return true",
+			args: args{
+				mass:        0,
+				currentFuel: -10,
+			},
+			expected: true,
+		},
+		{
+			name: "Should return false",
+			args: args{
+				mass:        1,
+				currentFuel: 1,
+			},
+			expected: false,
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			actual := isMassOrFuelBelowZero(test.args.mass, test.args.currentFuel)
+			assert.Equal(t, test.expected, actual)
+		})
+	}
+}
